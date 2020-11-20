@@ -67,9 +67,7 @@ def sub_set(arr)
     res # n^3
 end
 
-list1 = [5, 3, -7]
-list2 = [2, 3, -6, 7, -6, 7]
-list3 = [-5, -1, -3]
+
 
 # p sub_set(list)
 # p sub_set(list2)
@@ -79,8 +77,41 @@ list3 = [-5, -1, -3]
 # p largest_contiguous_subsum(list2)
 # p largest_contiguous_subsum(list3)
 
+
+require 'byebug'
 def largest_contiguous_subsum2(list)
+    max_sum = list[0]
+    curr_sum = list[0]
+# debugger
+    (0...list.length-1).each do |i|
+        if list[i] < 0 && list[i-1] > max_sum
+            max_sum = list[i-1]
+        else 
+            curr_sum = curr_sum + list[i+1]
+        end
+        
+    #    debugger
+        while curr_sum < max_sum
+            i += 1
+            break
 
-    (0...list.length)
+        end
+# debugger
+        if curr_sum >= max_sum 
+            max_sum = curr_sum   
+        end 
 
+        i += 1
+    end
+    max_sum
+    O(n) + O(1) 
+    iterate through indexes and check if curr sum is more than max sum
 end
+
+list1 = [5, 3, -7]
+list2 = [2, 3, -6, 7, -6, 7]
+list3 = [-5, -1, -3]
+
+p largest_contiguous_subsum2(list1)
+p largest_contiguous_subsum2(list2)
+p largest_contiguous_subsum2(list3)
